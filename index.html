@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PIN Lock">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>MAM Koszalin</title>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: Roboto, "Noto Sans", system-ui, -apple-system, sans-serif;
+    color: #304981;
+}
+
+.app {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 100%;
+    background: #ffffff;
+}
+
+/* PIN section — sized and spaced to match the supplied Android screenshot. */
+.pin-area {
+    position: absolute;
+    top: 24.3vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    padding-inline: 0;
+    text-align: center;
+}
+
+.boxes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9375rem;
+    padding: 0;
+}
+
+.box {
+    width: 4rem;
+    height: 5rem;
+    padding: 0;
+    border: 0.0625rem solid #d8deeb;
+    border-radius: 0.5625rem;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #304981;
+    font-family: Roboto, "Noto Sans", system-ui, -apple-system, sans-serif;
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.message {
+    margin: 0;
+    padding: 3rem 0.9375rem 0;
+    font-family: Roboto, "Noto Sans", system-ui, -apple-system, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 450;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+/* More options */
+.more {
+    position: absolute;
+    left: 50%;
+    top: 54.1vh;
+    transform: translateX(-50%);
+    border: 0;
+    white-space: nowrap;
+    outline: 0;
+    background: transparent;
+    color: #304981;
+    font-family: Roboto, "Noto Sans", system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    padding: 0.5rem 0.875rem;
+    cursor: pointer;
+}
+
+/* Dark overlay */
+.scrim {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.58);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
+/* Bottom menu */
+.sheet {
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    border-radius: 1.3125rem 1.3125rem 0 0;
+    padding: 1.125rem 1.25rem 1.5625rem;
+    transform: translateY(110%);
+    transition: transform 0.22s ease;
+}
+
+.sheet.open {
+    transform: translateY(0);
+}
+
+.scrim.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cancel {
+    min-height: 4.0625rem;
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+    padding: 0;
+    color: #304981;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.x {
+    width: 3.375rem;
+    padding: 0;
+    text-align: center;
+    color: #a64d52;
+    font-size: 2.3125rem;
+    font-weight: 300;
+}
+
+.divider {
+    height: 0.125rem;
+    width: 100%;
+    padding: 0;
+    background: #999999;
+    margin: 0 0 0.625rem;
+}
+
+.option {
+    min-height: 5.125rem;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: #304981;
+    font-size: 1.375rem;
+    cursor: pointer;
+}
+
+.icon {
+    width: 5.75rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Fingerprint icon */
+.fingerprint {
+    position: relative;
+    width: 2.375rem;
+    height: 2.8125rem;
+    padding: 0;
+    border: 0.125rem solid #304981;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+}
+
+.fingerprint:before {
+    content: "";
+    position: absolute;
+    left: 0.375rem;
+    right: 0.375rem;
+    top: 0.4375rem;
+    bottom: 0.25rem;
+    border: 0.125rem solid #304981;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+}
+
+.fingerprint:after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    top: 0.9375rem;
+    bottom: 0.125rem;
+    border: 0.125rem solid #304981;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+}
+
+.reset-icon {
+    font-size: 2.625rem;
+    line-height: 1;
+    transform: rotate(-20deg);
+}
+
+.star-icon {
+    font-size: 1.875rem;
+    font-weight: bold;
+}
+
+/* Error animation */
+.error .box {
+    border-color: #b65a60;
+}
+
+@media (max-width: 22.5rem) {
+    .message {
+        font-size: 1.1875rem;
+    }
+
+    .option {
+        font-size: 1.25rem;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="app" id="app">
+
+    <div class="pin-area" id="pinArea">
+        <div class="boxes">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+
+        <div class="message">Enter PIN to unlock the application.</div>
+    </div>
+
+    <button class="more" id="more">MORE OPTIONS</button>
+
+    <div class="scrim" id="scrim"></div>
+
+    <div class="sheet" id="sheet">
+        <div class="cancel" id="cancel">
+            <div class="x">×</div>
+            <div>Cancel</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="option" id="fingerprint">
+            <div class="icon">
+                <div class="fingerprint"></div>
+            </div>
+            <div>Use fingerprint</div>
+        </div>
+
+        <div class="option" id="reset">
+            <div class="icon">
+                <div class="reset-icon">↶</div>
+            </div>
+            <div>Reset PIN</div>
+        </div>
+
+        <div class="option" id="password">
+            <div class="icon">
+                <div class="star-icon">*</div>
+            </div>
+            <div>Sign in by password</div>
+        </div>
+    </div>
+
+    <input id="pinInput"
+           type="tel"
+           inputmode="numeric"
+           maxlength="4"
+           autocomplete="off"
+           style="position:fixed;left:-10000px;top:-10000px;opacity:0;">
+</div>
+
+<script>
+(function () {
+    const CORRECT_PIN = "0000";
+
+    const app = document.getElementById("app");
+    const boxes = document.querySelectorAll(".box");
+    const pinInput = document.getElementById("pinInput");
+
+    const more = document.getElementById("more");
+    const sheet = document.getElementById("sheet");
+    const scrim = document.getElementById("scrim");
+    const cancel = document.getElementById("cancel");
+    const reset = document.getElementById("reset");
+
+    let pin = "";
+
+    function updateBoxes() {
+        boxes.forEach(function (box, index) {
+            box.textContent = index < pin.length ? "*" : "";
+        });
+    }
+
+    function focusInput() {
+        pinInput.focus();
+    }
+
+    function clearPin() {
+        pin = "";
+        pinInput.value = "";
+        updateBoxes();
+    }
+
+    function checkPin() {
+        if (pin === CORRECT_PIN) {
+            // Correct PIN -> open main.html
+            window.location.href = "main.html";
+        } else {
+            app.classList.add("error");
+
+            setTimeout(function () {
+                app.classList.remove("error");
+                clearPin();
+                focusInput();
+            }, 450);
+        }
+    }
+
+    function openMenu() {
+        sheet.classList.add("open");
+        scrim.classList.add("open");
+        pinInput.blur();
+    }
+
+    function closeMenu() {
+        sheet.classList.remove("open");
+        scrim.classList.remove("open");
+        focusInput();
+    }
+
+    pinInput.addEventListener("input", function () {
+        pin = pinInput.value.replace(/[^0-9]/g, "").substring(0, 4);
+        pinInput.value = pin;
+
+        updateBoxes();
+
+        if (pin.length === 4) {
+            setTimeout(checkPin, 80);
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        // The hidden input receives normal keyboard input itself.
+        // Only handle Backspace/Escape here to avoid entering digits twice.
+        if (event.key === "Backspace") {
+            pinInput.value = pinInput.value.substring(0, pinInput.value.length - 1);
+            pin = pinInput.value;
+            updateBoxes();
+            event.preventDefault();
+        }
+
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+    });
+
+    document.getElementById("pinArea").addEventListener("click", focusInput);
+    boxes.forEach(function (box) {
+        box.addEventListener("click", focusInput);
+    });
+
+    more.addEventListener("click", openMenu);
+    cancel.addEventListener("click", closeMenu);
+    scrim.addEventListener("click", closeMenu);
+
+    reset.addEventListener("click", function () {
+        clearPin();
+        closeMenu();
+    });
+
+    document.getElementById("fingerprint").addEventListener("click", function () {
+        alert("Fingerprint authentication is not available in this web demo.");
+    });
+
+    document.getElementById("password").addEventListener("click", function () {
+        alert("Password sign-in is not available in this web demo.");
+    });
+
+    updateBoxes();
+    focusInput();
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js");
+    });
+}
+</script>
+</body>
+</html>
