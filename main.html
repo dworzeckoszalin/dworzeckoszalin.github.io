@@ -14,7 +14,7 @@
 <style>
 :root {
     --blue:#28467f;
-    --cyan:#08acd2;
+    --cyan:#01B1ED;
     --green:#24b44b;
     --muted:#9aa4b8;
     --card:#f3f6f9;
@@ -73,7 +73,7 @@ a {
     justify-content:center;
     align-items:center;
     height:var(--topbar-height);
-    padding:.8vw 4vw .3vw;
+    padding:0 4vw;
     background:rgba(255,255,255,.98);
 }
 
@@ -81,13 +81,16 @@ a {
     display:flex;
     align-items:center;
     justify-content:center;
+    height:100%;
+    width:100%;
 }
 
 .logo {
     display:block;
-    width:24vw;
-    height:auto;
-    max-height:calc(var(--topbar-height) - 1.2vw);
+    width:auto;
+    height:100%;
+    max-width:100%;
+    max-height:100%;
     object-fit:contain;
 }
 
@@ -388,9 +391,15 @@ a {
         height:18vh;
     }
 
+    .topbar a {
+        height:100%;
+    }
+
     .logo {
-        width:16vh;
-        max-height:17vh;
+        height:100%;
+        width:auto;
+        max-width:100%;
+        max-height:100%;
     }
 
     .content {
@@ -545,7 +554,6 @@ a {
         </section>
 
 
-
         <!-- NEWS -->
 
         <section aria-labelledby="news-title">
@@ -627,7 +635,6 @@ a {
     </main>
 
 
-
     <!-- =========================
          BOTTOM NAVIGATION
          ========================= -->
@@ -668,7 +675,6 @@ a {
         </a>
 
 
-
         <!-- BUY TICKET -->
 
         <a
@@ -697,7 +703,6 @@ a {
             <span>BUY TICKET</span>
 
         </a>
-
 
 
         <!-- MY TICKETS -->
@@ -742,7 +747,6 @@ a {
             <span>MY TICKETS</span>
 
         </a>
-
 
 
         <!-- MENU -->
@@ -797,7 +801,6 @@ a {
 </div>
 
 
-
 <script>
 
 /* ==========================================
@@ -844,7 +847,6 @@ a {
 })();
 
 
-
 /* ==========================================
    COUNTDOWN
    ==========================================
@@ -857,11 +859,13 @@ a {
    September 7 -> October 1 at 08:00
    October 15 -> November 1 at 08:00
    December 20 -> January 1 at 08:00
+
    ========================================== */
 
 function updateCountdown() {
 
     const now = new Date();
+
 
     /*
      * JavaScript months are zero-based:
@@ -945,7 +949,8 @@ setInterval(
 
 if ("serviceWorker" in navigator) {
 
-    navigator.serviceWorker
+    navigator
+        .serviceWorker
         .register("service-worker.js")
         .catch(function () {});
 
