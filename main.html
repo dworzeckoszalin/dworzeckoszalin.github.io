@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -61,6 +60,7 @@ a {
     padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom));
 }
 
+
 /* =========================
    TOP BAR
    ========================= */
@@ -91,6 +91,7 @@ a {
     object-fit:contain;
 }
 
+
 /* =========================
    CONTENT
    ========================= */
@@ -109,6 +110,11 @@ a {
     font-weight:500;
     letter-spacing:-.025vw;
 }
+
+
+/* =========================
+   TICKET CARD
+   ========================= */
 
 .ticket-card {
     position:relative;
@@ -212,6 +218,11 @@ a {
     border-radius:1vw;
 }
 
+
+/* =========================
+   DETAILS BUTTON
+   ========================= */
+
 .details {
     display:block;
     width:67vw;
@@ -228,6 +239,11 @@ a {
     font-weight:500;
     text-align:center;
 }
+
+
+/* =========================
+   NEWS
+   ========================= */
 
 .news-heading {
     display:flex;
@@ -275,6 +291,7 @@ a {
     margin-top:.4vw;
     margin-bottom:1.5vw;
 }
+
 
 /* =========================
    BOTTOM NAVIGATION
@@ -360,11 +377,13 @@ a {
     font-weight:500;
 }
 
+
 /* =========================
    LANDSCAPE
    ========================= */
 
 @media (orientation:landscape) {
+
     .topbar {
         height:18vh;
     }
@@ -421,242 +440,517 @@ a {
     }
 }
 </style>
-
 </head>
+
 
 <body>
 
 <div class="app">
 
-```
-<!-- =========================
-     SHARED TOP BAR
-     ========================= -->
 
-<header class="topbar">
-    <a href="main.html" aria-label="MZK Koszalin home">
-        <img class="logo" src="logo.png" alt="MZK Koszalin">
-    </a>
-</header>
+    <!-- =========================
+         TOP BAR
+         ========================= -->
+
+    <header class="topbar">
+
+        <a href="main.html" aria-label="MZK Koszalin home">
+
+            <img
+                class="logo"
+                src="logo.png"
+                alt="MZK Koszalin"
+            >
+
+        </a>
+
+    </header>
 
 
-<!-- =========================
-     MAIN CONTENT
-     ========================= -->
+    <!-- =========================
+         MAIN CONTENT
+         ========================= -->
 
-<main class="content">
+    <main class="content">
 
-    <section aria-labelledby="active-title">
 
-        <h1 id="active-title" class="section-title">
-            Active tickets
-        </h1>
+        <!-- ACTIVE TICKETS -->
 
-        <!-- Pressing this ticket opens ticket.html -->
-        <a
-            class="ticket-card"
-            href="ticket.html"
-            aria-label="Open Zone A reduced periodic ticket"
-        >
-            <div class="ticket-accent"></div>
+        <section aria-labelledby="active-title">
 
-            <div class="ticket-inner">
+            <h1 id="active-title" class="section-title">
+                Active tickets
+            </h1>
 
-                <p class="ticket-zone">
-                    Zone A
-                </p>
 
-                <p class="ticket-type">
-                    Reduced periodic
-                </p>
+            <!-- Clicking the ticket opens ticket.html -->
 
-                <p class="ticket-subtitle">
-                    Bilet 30-dniowy imienny
-                </p>
+            <a
+                class="ticket-card"
+                href="ticket.html"
+                aria-label="Open Zone A reduced periodic ticket"
+            >
 
-                <div class="ticket-status">
+                <div class="ticket-accent"></div>
 
-                    <span class="active">
-                        Active
-                    </span>
+                <div class="ticket-inner">
 
-                    <span class="duration">
-                        <span class="clock" aria-hidden="true"></span>
-                        10d 22h
-                    </span>
+                    <p class="ticket-zone">
+                        Zone A
+                    </p>
+
+                    <p class="ticket-type">
+                        Reduced periodic
+                    </p>
+
+                    <p class="ticket-subtitle">
+                        Bilet 30-dniowy imienny
+                    </p>
+
+
+                    <div class="ticket-status">
+
+                        <span class="active">
+                            Active
+                        </span>
+
+
+                        <span class="duration">
+
+                            <span
+                                class="clock"
+                                aria-hidden="true"
+                            ></span>
+
+                            <span id="countdown">
+                                0d 0h
+                            </span>
+
+                        </span>
+
+                    </div>
 
                 </div>
 
-            </div>
-        </a>
+            </a>
 
-        <button class="details" type="button">
-            SHOW DETAILS
-        </button>
-
-    </section>
-
-
-    <section aria-labelledby="news-title">
-
-        <div class="news-heading">
-
-            <h2 id="news-title" class="section-title">
-                News
-            </h2>
 
             <button
-                class="filter"
+                class="details"
                 type="button"
-                aria-label="Filter news"
             >
-                <svg viewBox="0 0 48 48" aria-hidden="true">
-                    <circle cx="8" cy="10" r="4"></circle>
-                    <path d="M18 10h24"></path>
-
-                    <circle cx="8" cy="24" r="4"></circle>
-                    <path d="M18 24h24"></path>
-
-                    <circle cx="8" cy="38" r="4"></circle>
-                    <path d="M18 38h16"></path>
-                </svg>
+                SHOW DETAILS
             </button>
 
-        </div>
+        </section>
 
-        <img
-            class="card-image news-image"
-            src="news-card.png"
-            alt="News: Aktualizacja regulaminu od 10/09/2026"
+
+
+        <!-- NEWS -->
+
+        <section aria-labelledby="news-title">
+
+            <div class="news-heading">
+
+                <h2
+                    id="news-title"
+                    class="section-title"
+                >
+                    News
+                </h2>
+
+
+                <button
+                    class="filter"
+                    type="button"
+                    aria-label="Filter news"
+                >
+
+                    <svg
+                        viewBox="0 0 48 48"
+                        aria-hidden="true"
+                    >
+
+                        <circle
+                            cx="8"
+                            cy="10"
+                            r="4"
+                        ></circle>
+
+                        <path d="M18 10h24"></path>
+
+
+                        <circle
+                            cx="8"
+                            cy="24"
+                            r="4"
+                        ></circle>
+
+                        <path d="M18 24h24"></path>
+
+
+                        <circle
+                            cx="8"
+                            cy="38"
+                            r="4"
+                        ></circle>
+
+                        <path d="M18 38h16"></path>
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <img
+                class="card-image news-image"
+                src="news-card.png"
+                alt="News: Aktualizacja regulaminu od 10/09/2026"
+            >
+
+
+            <h2 class="section-title">
+                Bus schedule
+            </h2>
+
+
+            <img
+                class="card-image bus-image"
+                src="bus-card.png"
+                alt="Information about actual time of bus arrival"
+            >
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         BOTTOM NAVIGATION
+         ========================= -->
+
+    <nav
+        class="bottom-nav"
+        aria-label="Main navigation"
+    >
+
+
+        <!-- START -->
+
+        <a
+            class="nav-item"
+            href="main.html"
+            data-page="main.html"
         >
 
-        <h2 class="section-title">
-            Bus schedule
-        </h2>
+            <span class="nav-icon">
 
-        <img
-            class="card-image bus-image"
-            src="bus-card.png"
-            alt="Information about actual time of bus arrival"
+                <svg
+                    viewBox="0 0 48 48"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M7 22 24 7l17 15v19H29V29H19v12H7Z"
+                        fill="currentColor"
+                        stroke="none"
+                    ></path>
+
+                </svg>
+
+            </span>
+
+            <span>START</span>
+
+        </a>
+
+
+
+        <!-- BUY TICKET -->
+
+        <a
+            class="nav-item"
+            href="buy.html"
+            data-page="buy.html"
         >
 
-    </section>
+            <span class="nav-icon">
 
-</main>
+                <svg
+                    viewBox="0 0 48 48"
+                    aria-hidden="true"
+                >
 
+                    <path d="M15 9h23v25H15Z"></path>
 
-<!-- =========================
-     SHARED BOTTOM NAVIGATION
-     ========================= -->
+                    <path d="M10 14v25h23"></path>
 
-<nav class="bottom-nav" aria-label="Main navigation">
+                    <path d="M26 15v13M19.5 21.5h13"></path>
 
-    <!-- START -->
-    <a class="nav-item" href="main.html">
-        <span class="nav-icon">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-                <path
-                    d="M7 22 24 7l17 15v19H29V29H19v12H7Z"
-                    fill="currentColor"
-                    stroke="none"
-                ></path>
-            </svg>
-        </span>
+                </svg>
 
-        <span>START</span>
-    </a>
+            </span>
+
+            <span>BUY TICKET</span>
+
+        </a>
 
 
-    <!-- BUY TICKET -->
-    <a class="nav-item" href="buy.html">
-        <span class="nav-icon">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-                <path d="M15 9h23v25H15Z"></path>
-                <path d="M10 14v25h23"></path>
-                <path d="M26 15v13M19.5 21.5h13"></path>
-            </svg>
-        </span>
 
-        <span>BUY TICKET</span>
-    </a>
+        <!-- MY TICKETS -->
 
+        <a
+            class="nav-item"
+            href="tickets.html"
+            data-page="tickets.html"
+        >
 
-    <!-- MY TICKETS -->
-    <a class="nav-item" href="tickets.html">
-        <span class="nav-icon">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-                <rect
-                    x="14"
-                    y="8"
-                    width="27"
-                    height="31"
-                    rx="4"
-                ></rect>
+            <span class="nav-icon">
 
-                <path d="M21 17h13"></path>
-                <path d="M21 24h13"></path>
-                <path d="M21 31h8"></path>
-            </svg>
-        </span>
+                <svg
+                    viewBox="0 0 48 48"
+                    aria-hidden="true"
+                >
 
-        <span class="ticket-count">1</span>
+                    <rect
+                        x="14"
+                        y="8"
+                        width="27"
+                        height="31"
+                        rx="4"
+                    ></rect>
 
-        <span>MY TICKETS</span>
-    </a>
+                    <path d="M21 17h13"></path>
+
+                    <path d="M21 24h13"></path>
+
+                    <path d="M21 31h8"></path>
+
+                </svg>
+
+            </span>
 
 
-    <!-- MENU -->
-    <a class="nav-item" href="menu.html">
-        <span class="nav-icon">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-                <circle
-                    cx="9"
-                    cy="24"
-                    r="3"
-                    fill="currentColor"
-                    stroke="none"
-                ></circle>
+            <span class="ticket-count">
+                1
+            </span>
 
-                <circle
-                    cx="24"
-                    cy="24"
-                    r="3"
-                    fill="currentColor"
-                    stroke="none"
-                ></circle>
 
-                <circle
-                    cx="39"
-                    cy="24"
-                    r="3"
-                    fill="currentColor"
-                    stroke="none"
-                ></circle>
-            </svg>
-        </span>
+            <span>MY TICKETS</span>
 
-        <span>MENU</span>
-    </a>
+        </a>
 
-</nav>
-```
+
+
+        <!-- MENU -->
+
+        <a
+            class="nav-item"
+            href="menu.html"
+            data-page="menu.html"
+        >
+
+            <span class="nav-icon">
+
+                <svg
+                    viewBox="0 0 48 48"
+                    aria-hidden="true"
+                >
+
+                    <circle
+                        cx="9"
+                        cy="24"
+                        r="3"
+                        fill="currentColor"
+                        stroke="none"
+                    ></circle>
+
+                    <circle
+                        cx="24"
+                        cy="24"
+                        r="3"
+                        fill="currentColor"
+                        stroke="none"
+                    ></circle>
+
+                    <circle
+                        cx="39"
+                        cy="24"
+                        r="3"
+                        fill="currentColor"
+                        stroke="none"
+                    ></circle>
+
+                </svg>
+
+            </span>
+
+            <span>MENU</span>
+
+        </a>
+
+    </nav>
 
 </div>
 
-<!-- Automatically highlights the current page -->
 
-<script src="shared-navigation.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.initSharedNavigation) {
-        window.initSharedNavigation();
+
+/* ==========================================
+   CURRENT PAGE NAVIGATION HIGHLIGHT
+   ========================================== */
+
+(function () {
+
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop()
+            .toLowerCase() || "main.html";
+
+
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(function (item) {
+
+            const page =
+                (item.getAttribute("data-page") || "")
+                    .toLowerCase();
+
+
+            if (
+                page === currentPage ||
+                (
+                    currentPage === "index.html" &&
+                    page === "main.html"
+                )
+            ) {
+
+                item.classList.add("active-nav");
+
+                item.setAttribute(
+                    "aria-current",
+                    "page"
+                );
+
+            }
+
+        });
+
+})();
+
+
+
+/* ==========================================
+   COUNTDOWN
+   ==========================================
+
+   Counts down to:
+   The 1st day of the NEXT month
+   at exactly 08:00 local time.
+
+   Example:
+   September 7 -> October 1 at 08:00
+   October 15 -> November 1 at 08:00
+   December 20 -> January 1 at 08:00
+   ========================================== */
+
+function updateCountdown() {
+
+    const now = new Date();
+
+    /*
+     * JavaScript months are zero-based:
+     * January = 0
+     * February = 1
+     * ...
+     * December = 11
+     *
+     * Using day 1 of month + 1 automatically
+     * handles December -> January.
+     */
+
+    const target = new Date(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        1,
+        8,
+        0,
+        0,
+        0
+    );
+
+
+    let difference =
+        target.getTime() - now.getTime();
+
+
+    if (difference < 0) {
+        difference = 0;
     }
-});
+
+
+    const totalHours =
+        Math.floor(
+            difference / (1000 * 60 * 60)
+        );
+
+
+    const days =
+        Math.floor(totalHours / 24);
+
+
+    const hours =
+        totalHours % 24;
+
+
+    const countdown =
+        document.getElementById("countdown");
+
+
+    if (countdown) {
+
+        countdown.textContent =
+            days + "d " + hours + "h";
+
+    }
+
+}
+
+
+/*
+ * Update immediately when the page loads.
+ */
+
+updateCountdown();
+
+
+/*
+ * Update every minute.
+ */
+
+setInterval(
+    updateCountdown,
+    60 * 1000
+);
+
+
+/* ==========================================
+   SERVICE WORKER
+   ========================================== */
 
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js").catch(function () {});
+
+    navigator.serviceWorker
+        .register("service-worker.js")
+        .catch(function () {});
+
 }
+
 </script>
 
 </body>
