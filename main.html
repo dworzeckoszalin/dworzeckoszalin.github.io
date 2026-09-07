@@ -14,44 +14,44 @@
 <style>
 :root {
     --blue:#28467f; --cyan:#08acd2; --green:#24b44b; --muted:#9aa4b8; --card:#f3f6f9;
-    --content-width:83.5vw; --nav-height:9.2vw;
+    --content-width:83.5vw; --nav-height:17vw;
 }
 *{box-sizing:border-box}
 html{margin:0;background:#fff;color:var(--blue);font-family:Roboto,"Noto Sans",system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;min-height:100dvh;background:#fff}
 button,input,textarea,select{font:inherit}
 .app{min-height:100dvh;padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom))}
-.topbar{position:sticky;z-index:20;top:0;display:flex;justify-content:center;align-items:center;height:12.5vw;padding:.7vw 4vw .2vw;background:rgba(255,255,255,.98)}
-.logo{display:block;width:18vw;height:auto}
+.topbar{position:sticky;z-index:20;top:0;display:flex;justify-content:center;align-items:center;height:17vw;padding:.8vw 4vw .3vw;background:rgba(255,255,255,.98)}
+.logo{display:block;width:21vw;height:auto}
 .content{width:var(--content-width);margin:0 auto;padding:1.9vw 0 5vw}
 .section-title{margin:0;padding:0 0 3.1vw;font-size:4.25vw;line-height:1.08;font-weight:500;letter-spacing:-.025vw}
 .ticket-card{position:relative;display:grid;grid-template-columns:4.2vw 1fr;width:100%;aspect-ratio:2.4/1;overflow:hidden;border:.45vw solid var(--cyan);border-radius:2.65vw;background:var(--card)}
 .ticket-accent{background:var(--cyan)}
-.ticket-inner{position:relative;padding:3.8vw 2.25vw 2.5vw}
-.ticket-zone{margin:0 0 2.8vw;font-size:4.05vw;line-height:1;font-weight:400}
-.ticket-type{margin:0 0 2.35vw;font-size:3.85vw;line-height:1.08;font-weight:400}
-.ticket-subtitle{margin:0;color:var(--muted);font-size:3.05vw;line-height:1.12;font-weight:400}
-.ticket-status{position:absolute;top:3.8vw;right:2.2vw;text-align:right}
-.active{display:block;margin-bottom:2.45vw;color:var(--green);font-size:4.05vw;line-height:1;font-weight:500}
-.duration{display:flex;align-items:center;justify-content:flex-end;gap:1.25vw;color:var(--blue);font-size:3.35vw;line-height:1;font-weight:500}
-.clock{width:3vw;aspect-ratio:1;border:.38vw solid currentColor;border-radius:50%;position:relative;flex:0 0 auto}
+.ticket-inner{position:relative;padding:4.1vw 2.45vw 2.7vw}
+.ticket-zone{margin:0 0 2.8vw;font-size:4.55vw;line-height:1;font-weight:400}
+.ticket-type{margin:0 0 2.35vw;font-size:4.3vw;line-height:1.08;font-weight:400}
+.ticket-subtitle{margin:0;color:var(--muted);font-size:3.35vw;line-height:1.12;font-weight:400}
+.ticket-status{position:absolute;top:4.1vw;right:2.4vw;text-align:right}
+.active{display:block;margin-bottom:2.45vw;color:var(--green);font-size:4.55vw;line-height:1;font-weight:500}
+.duration{display:flex;align-items:center;justify-content:flex-end;gap:1.25vw;color:var(--blue);font-size:3.6vw;line-height:1;font-weight:500}
+.clock{width:3.25vw;aspect-ratio:1;border:.4vw solid currentColor;border-radius:50%;position:relative;flex:0 0 auto}
 .clock::before{content:"";position:absolute;width:.38vw;height:.9vw;left:calc(50% - .19vw);top:.45vw;background:currentColor;border-radius:1vw}
 .clock::after{content:"";position:absolute;width:.9vw;height:.38vw;left:50%;top:calc(50% - .19vw);background:currentColor;border-radius:1vw}
 .details{display:block;width:67vw;max-width:100%;margin:3.2vw auto 6.9vw;padding:2.2vw 2vw 2.35vw;border:0;border-radius:8vw;background:linear-gradient(100deg,#42468c,#633c77);color:#fff;font:inherit;font-size:3.55vw;line-height:1;font-weight:500;text-align:center}
 .news-heading{display:flex;align-items:center;justify-content:space-between;padding-bottom:2.7vw}
 .news-heading .section-title{padding-bottom:0}
 .filter{width:7vw;height:7vw;display:grid;place-items:center;padding:0;border:0;background:transparent}
-.filter svg{width:6vw;height:6vw;stroke:var(--blue);fill:none;stroke-width:2.2;stroke-linecap:round}
+.filter svg{width:6.5vw;height:6.5vw;stroke:var(--blue);fill:none;stroke-width:2.2;stroke-linecap:round}
 .card-image{display:block;width:100%;height:auto;border-radius:2.65vw;object-fit:cover}
 .news-image{margin-bottom:6.2vw}.bus-image{margin-top:.4vw;margin-bottom:1.5vw}
 .bottom-nav{position:fixed;z-index:30;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);min-height:var(--nav-height);padding:.7vw 1.2vw calc(.5vw + env(safe-area-inset-bottom));background:rgba(255,255,255,.98);border-top:.18vw solid #e4e8ee;box-shadow:0 -.2vw .8vw rgba(0,0,0,.04)}
-.nav-item{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45vw;min-width:0;padding:.7vw .1vw;border:0;background:transparent;color:#9ba4b7;font:inherit;font-size:2.65vw;line-height:1;font-weight:400}
+.nav-item{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45vw;min-width:0;padding:.7vw .1vw;border:0;background:transparent;color:#9ba4b7;font:inherit;font-size:3.05vw;line-height:1;font-weight:400}
 .nav-item.active-nav{color:var(--blue)}
 .nav-item.active-nav::before{content:"";position:absolute;top:-.7vw;left:-1.2vw;right:-1.2vw;height:.18vw;background:var(--blue)}
-.nav-icon{width:6vw;height:6vw;display:grid;place-items:center}
+.nav-icon{width:7vw;height:7vw;display:grid;place-items:center}
 .nav-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-.ticket-count{position:absolute;top:1.8vw;margin-left:4.3vw;display:grid;place-items:center;width:4.4vw;aspect-ratio:1;border-radius:50%;background:#17b94d;color:#fff;font-size:2.2vw;font-weight:500}
-@media (orientation:landscape){.topbar{height:10vh}.logo{width:12vh}.content{width:min(83.5vw,100vh)}.section-title{font-size:3.2vh;padding-bottom:2.3vh}.ticket-card{border-width:.35vh;border-radius:2.1vh}.ticket-inner{padding:3vh 2vh}.ticket-zone{font-size:3vh}.ticket-type{font-size:2.85vh}.ticket-subtitle{font-size:2.25vh}.active{font-size:3vh}.duration{font-size:2.45vh}.details{font-size:2.6vh}.nav-item{font-size:2vh}}
+.ticket-count{position:absolute;top:1.8vw;margin-left:4.3vw;display:grid;place-items:center;width:4.8vw;aspect-ratio:1;border-radius:50%;background:#17b94d;color:#fff;font-size:2.4vw;font-weight:500}
+@media (orientation:landscape){.topbar{height:15vh}.logo{width:14vh}.content{width:min(83.5vw,100vh)}.section-title{font-size:3.2vh;padding-bottom:2.3vh}.ticket-card{border-width:.35vh;border-radius:2.1vh}.ticket-inner{padding:3.5vh 2.3vh}.ticket-zone{font-size:3.4vh}.ticket-type{font-size:3.2vh}.ticket-subtitle{font-size:2.5vh}.active{font-size:3.4vh}.duration{font-size:2.65vh}.details{font-size:2.6vh}.nav-item{font-size:2.25vh}}
 </style>
 </head>
 
