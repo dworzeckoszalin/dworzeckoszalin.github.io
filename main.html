@@ -14,15 +14,15 @@
 <style>
 :root {
     --blue:#28467f; --cyan:#08acd2; --green:#24b44b; --muted:#9aa4b8; --card:#f3f6f9;
-    --content-width:83.5vw; --nav-height:17vw;
+    --content-width:83.5vw; --nav-height:17vw; --topbar-height:21vw;
 }
 *{box-sizing:border-box}
 html{margin:0;background:#fff;color:var(--blue);font-family:Roboto,"Noto Sans",system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;min-height:100dvh;background:#fff}
 button,input,textarea,select{font:inherit}
 .app{min-height:100dvh;padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom))}
-.topbar{position:sticky;z-index:20;top:0;display:flex;justify-content:center;align-items:center;height:17vw;padding:.8vw 4vw .3vw;background:rgba(255,255,255,.98)}
-.logo{display:block;width:21vw;height:auto}
+.topbar{position:sticky;z-index:20;top:0;display:flex;justify-content:center;align-items:center;height:var(--topbar-height);padding:.8vw 4vw .3vw;background:rgba(255,255,255,.98)}
+.logo{display:block;width:24vw;height:auto;max-height:calc(var(--topbar-height) - 1.2vw);object-fit:contain}
 .content{width:var(--content-width);margin:0 auto;padding:1.9vw 0 5vw}
 .section-title{margin:0;padding:0 0 3.1vw;font-size:4.25vw;line-height:1.08;font-weight:500;letter-spacing:-.025vw}
 .ticket-card{position:relative;display:grid;grid-template-columns:4.2vw 1fr;width:100%;aspect-ratio:2.4/1;overflow:hidden;border:.45vw solid var(--cyan);border-radius:2.65vw;background:var(--card)}
@@ -51,7 +51,7 @@ button,input,textarea,select{font:inherit}
 .nav-icon{width:7vw;height:7vw;display:grid;place-items:center}
 .nav-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
 .ticket-count{position:absolute;top:1.8vw;margin-left:4.3vw;display:grid;place-items:center;width:4.8vw;aspect-ratio:1;border-radius:50%;background:#17b94d;color:#fff;font-size:2.4vw;font-weight:500}
-@media (orientation:landscape){.topbar{height:15vh}.logo{width:14vh}.content{width:min(83.5vw,100vh)}.section-title{font-size:3.2vh;padding-bottom:2.3vh}.ticket-card{border-width:.35vh;border-radius:2.1vh}.ticket-inner{padding:3.5vh 2.3vh}.ticket-zone{font-size:3.4vh}.ticket-type{font-size:3.2vh}.ticket-subtitle{font-size:2.5vh}.active{font-size:3.4vh}.duration{font-size:2.65vh}.details{font-size:2.6vh}.nav-item{font-size:2.25vh}}
+@media (orientation:landscape){.topbar{height:18vh}.logo{width:16vh;max-height:17vh}.content{width:min(83.5vw,100vh)}.section-title{font-size:3.2vh;padding-bottom:2.3vh}.ticket-card{border-width:.35vh;border-radius:2.1vh}.ticket-inner{padding:3.5vh 2.3vh}.ticket-zone{font-size:3.4vh}.ticket-type{font-size:3.2vh}.ticket-subtitle{font-size:2.5vh}.active{font-size:3.4vh}.duration{font-size:2.65vh}.details{font-size:2.6vh}.nav-item{font-size:2.25vh}}
 </style>
 </head>
 
