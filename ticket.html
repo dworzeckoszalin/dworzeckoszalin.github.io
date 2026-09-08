@@ -15,40 +15,15 @@
 
   /* Mobile-screen proportions from the reference */
   .phone {
-    width: min(100vw, 450px);
+    width: 100%;
+    max-width: 450px;
     min-height: 100vh;
     margin: 0 auto;
     background: #fff;
     overflow: hidden;
     position: relative;
   }
-
-  .statusbar {
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 14px 0 24px;
-    color: #6d727c;
-    font-size: 13px;
-  }
-  .status-left { display: flex; gap: 8px; align-items: center; }
-  .status-icons { display: flex; align-items: center; gap: 6px; }
-  .wifi { font-size: 13px; transform: rotate(-15deg); }
-  .signal {
-    width: 16px; height: 12px; display: inline-flex; align-items: flex-end; gap: 2px;
-  }
-  .signal i { display:block; width:2px; background:#747982; }
-  .signal i:nth-child(1) {height:4px} .signal i:nth-child(2) {height:7px}
-  .signal i:nth-child(3) {height:10px} .signal i:nth-child(4) {height:12px}
-  .battery {
-    width: 25px; height: 12px; border: 1.5px solid #777b82; border-radius: 3px;
-    position: relative; font-size: 7px; display:flex; align-items:center; justify-content:center;
-  }
-  .battery:after { content:""; position:absolute; right:-3.5px; top:3px; width:2px; height:5px; background:#777b82; border-radius:1px; }
-  .battery span { font-size: 7px; color:#777b82; }
-
-  .header {
+.header {
     height: 73px;
     display:flex; align-items:center;
     padding: 0 20px;
@@ -144,36 +119,12 @@
   .bottom {
     height: 64px;
     border-top: 1px solid #f0f0f2;
-    background:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:space-around;
-    padding: 0 55px;
-    color:#72777f;
-  }
-  .nav-gesture { width: 18px; height: 18px; border-bottom:2px solid #72777f; border-left:2px solid #72777f; transform:rotate(-45deg); }
-  .nav-home { width: 19px; height:19px; border:2px solid #72777f; border-radius:50%; }
-  .nav-recent { width: 18px; height:18px; position:relative; }
-  .nav-recent:before, .nav-recent:after { content:""; position:absolute; left:3px; right:3px; height:2px; background:#72777f; border-radius:2px; }
-  .nav-recent:before {top:5px} .nav-recent:after {top:11px}
-
-  @media (min-width: 700px) {
-    body { padding: 24px 0; }
-    .phone {
-      min-height: 900px;
-      border-radius: 38px;
-      box-shadow: 0 20px 70px rgba(0,0,0,.45);
-    }
+    background: #fff;
   }
 </style>
 </head>
 <body>
 <main class="phone">
-  <div class="statusbar">
-    <div class="status-left"><span>00:42</span><span>⌁</span><span>▣</span><span>•</span></div>
-    <div class="status-icons"><span>◉</span><span class="wifi">⌁</span><span class="signal"><i></i><i></i><i></i><i></i></span><span class="battery"><span>49</span></span></div>
-  </div>
-
   <header class="header"><span class="back"></span><span>Ticket control</span></header>
 
   <section class="content">
@@ -237,11 +188,7 @@
     </div>
   </section>
 
-  <nav class="bottom" aria-label="System navigation">
-    <span class="nav-recent"></span>
-    <span class="nav-home"></span>
-    <span class="nav-gesture"></span>
-  </nav>
+  <nav class="bottom" aria-label="Bottom bar"></nav>
 </main>
 </body>
 </html>
