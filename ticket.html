@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ticket control</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #111; }
+  body {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    color: #596275;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Mobile-screen proportions from the reference */
+  .phone {
+    width: min(100vw, 450px);
+    min-height: 100vh;
+    margin: 0 auto;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .statusbar {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px 0 24px;
+    color: #6d727c;
+    font-size: 13px;
+  }
+  .status-left { display: flex; gap: 8px; align-items: center; }
+  .status-icons { display: flex; align-items: center; gap: 6px; }
+  .wifi { font-size: 13px; transform: rotate(-15deg); }
+  .signal {
+    width: 16px; height: 12px; display: inline-flex; align-items: flex-end; gap: 2px;
+  }
+  .signal i { display:block; width:2px; background:#747982; }
+  .signal i:nth-child(1) {height:4px} .signal i:nth-child(2) {height:7px}
+  .signal i:nth-child(3) {height:10px} .signal i:nth-child(4) {height:12px}
+  .battery {
+    width: 25px; height: 12px; border: 1.5px solid #777b82; border-radius: 3px;
+    position: relative; font-size: 7px; display:flex; align-items:center; justify-content:center;
+  }
+  .battery:after { content:""; position:absolute; right:-3.5px; top:3px; width:2px; height:5px; background:#777b82; border-radius:1px; }
+  .battery span { font-size: 7px; color:#777b82; }
+
+  .header {
+    height: 73px;
+    display:flex; align-items:center;
+    padding: 0 20px;
+    color:#273b78;
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: -.3px;
+  }
+  .back {
+    width: 31px; height: 31px; margin-right: 9px; position:relative;
+  }
+  .back:before, .back:after {
+    content:""; position:absolute; width:13px; height:2px; left:5px; background:#40558d;
+    transform-origin:left center; border-radius:2px;
+  }
+  .back:before { top:10px; transform:rotate(-48deg); }
+  .back:after { top:20px; transform:rotate(48deg); }
+
+  .content { padding: 0 12px 88px; }
+  .card {
+    background: #f8f8fa;
+    border-radius: 9px;
+    margin-bottom: 7px;
+    padding: 27px 17px 25px;
+  }
+  .label {
+    font-size: 17px;
+    line-height: 1.25;
+    color:#5c6578;
+    margin-bottom: 10px;
+  }
+  .value {
+    font-size: 17px;
+    line-height: 1.35;
+    color:#5e687b;
+  }
+
+  .desc { padding-bottom: 20px; }
+  .desc .value { line-height: 1.42; }
+
+  .details {
+    padding: 24px 20px 23px;
+    margin-top: 2px;
+  }
+  .detail-grid {
+    display:grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
+    row-gap: 7px;
+    align-items:center;
+  }
+  .detail-grid .k {
+    font-size: 16px;
+    line-height: 1.15;
+    color:#596275;
+  }
+  .detail-grid .v {
+    font-size: 16px;
+    line-height: 1.15;
+    color:#596275;
+    text-align:right;
+    white-space:nowrap;
+  }
+  .status {
+    display:inline-block;
+    background:#0fbd22;
+    color:white;
+    font-size:17px;
+    line-height: 32px;
+    padding:0 18px;
+    border-radius:6px;
+    margin-bottom: -1px;
+  }
+  .id-wrap { max-width: 190px; white-space:normal !important; line-height:1.15 !important; }
+  .qr-section {
+    background:#fff;
+    text-align:center;
+    padding: 28px 0 0;
+  }
+  .qr {
+    width: 290px;
+    height: 290px;
+    image-rendering: pixelated;
+    display:block;
+    margin: 0 auto;
+  }
+  .code {
+    font-size: 16px;
+    color:#707786;
+    margin-top: 24px;
+  }
+
+  .bottom {
+    height: 64px;
+    border-top: 1px solid #f0f0f2;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    padding: 0 55px;
+    color:#72777f;
+  }
+  .nav-gesture { width: 18px; height: 18px; border-bottom:2px solid #72777f; border-left:2px solid #72777f; transform:rotate(-45deg); }
+  .nav-home { width: 19px; height:19px; border:2px solid #72777f; border-radius:50%; }
+  .nav-recent { width: 18px; height:18px; position:relative; }
+  .nav-recent:before, .nav-recent:after { content:""; position:absolute; left:3px; right:3px; height:2px; background:#72777f; border-radius:2px; }
+  .nav-recent:before {top:5px} .nav-recent:after {top:11px}
+
+  @media (min-width: 700px) {
+    body { padding: 24px 0; }
+    .phone {
+      min-height: 900px;
+      border-radius: 38px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.45);
+    }
+  }
+</style>
+</head>
+<body>
+<main class="phone">
+  <div class="statusbar">
+    <div class="status-left"><span>00:42</span><span>⌁</span><span>▣</span><span>•</span></div>
+    <div class="status-icons"><span>◉</span><span class="wifi">⌁</span><span class="signal"><i></i><i></i><i></i><i></i></span><span class="battery"><span>49</span></span></div>
+  </div>
+
+  <header class="header"><span class="back"></span><span>Ticket control</span></header>
+
+  <section class="content">
+    <div class="card">
+      <div class="label">Ticket name</div>
+      <div class="value">Bilet 30-dniowy imienny</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Ticket type</div>
+      <div class="value">Periodic</div>
+    </div>
+
+    <div class="card desc">
+      <div class="label">Description</div>
+      <div class="value">
+        Bilet okresowy 30-dniowy imienny na<br>
+        dowolnie wybrane kolejne 30 dni,<br>
+        uprawniający do nieograniczonej liczby<br>
+        przejazdów różnymi kursami autobusów.
+      </div>
+    </div>
+
+    <div class="card details">
+      <div class="detail-grid">
+        <div class="k">Ticket status</div>
+        <div class="v"><span class="status">Active</span></div>
+
+        <div class="k">Price</div>
+        <div class="v">59.00 PLN</div>
+
+        <div class="k">Start date</div>
+        <div class="v">19.08.2026; 19:21</div>
+
+        <div class="k">End date</div>
+        <div class="v">17.09.2026; 23:59</div>
+
+        <div class="k">Ticket id</div>
+        <div class="v id-wrap">75d85f4a-d8a8-42fc-8<br>9ea-e2b961d5ebff</div>
+
+        <div class="k">Name</div>
+        <div class="v">jakub</div>
+
+        <div class="k">Surname</div>
+        <div class="v">waś</div>
+
+        <div class="k">Document type</div>
+        <div class="v">School ID card</div>
+
+        <div class="k">Document number</div>
+        <div class="v">116-2025.2026</div>
+
+        <div class="k">Purchase date</div>
+        <div class="v">19.08.2026; 19:20</div>
+      </div>
+    </div>
+
+    <div class="qr-section">
+      <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC2klEQVR4nO1bQYobMRCszgj2qEAepP1B3pQn5Qfjp+wDFjRHw5jKQd2SvLCrBIwjQdfBHnvq0NDTrVK1BlBsLN+JJJk3ApHkHkmkbCx8w7/B+f+brwkFgHjW/2+ClG8CHAHcsZEkOWP8zh/wDxF5BcAdAHCIAJFazojXcldEwnPicf4D+aFdSnp7IYAz4PLzPRDYKIjPjcf5j+V3+SVwAjh+3GX1CCCOp8Xj/MfyO0FFZmvSiSe4R1NaKfv6uyi/QtP4ycfT4nH+Y/lghW2ITESnDK3khn22+J0/QsralVsvRuJ537g3S/xs8Tt/CLMxbJvbUgu0dJdHwOt3MX6B+RskEGtDzlBrY2+PwGzxO38AdSCphkbJavkwEW03NtfPy/HRlSmpmeYOVc3c4wn76fldj68rLOJZtHJ3VRZhW3q1e88Wv/MHMNVsi7DWr97oJ0nYfP1djt+15tKGFVtVWlrJmvjZ4nf+kB+vgosEIPEq2qQBIL0FiHzXnPOXiEwZv/O/wgdVpYI5nuj0VfE34PpqPb45kLnfGpmhYaXL9nO2+J0/QDMvzHCu+qrq5yq85ovf+UOUgUK1Jk0w23/Wrn1/tCLf9ke1asvUtxnOqP6z+5ML8gtaklv93s0XrJw9v4vxSwZ7G5L9Sow6+Hd9tSTfvMhsV8XVyKj6uZpYnt8F+VU/9zbVhyZtZ7JcX63HD8AhAPBCAQACt1A8rfQ7nLi8bqcgvgdeBOBltvidP4Kuv6xDhjoLNBMLgDpZ88Xv/AHartcm/TZVKOjeWXlGPM5/LL8/P1lq1ZS0Lr13pzvmi9/5fwk7NVlQpJUdfe42wbPF7/wRyjGNvPWGZN0E99az+1cL8tEqtPkblm6YHQ1AG/ds8Tt/hNaBSwZjO3B11tGgzYmni9/5I3QrbBsdmZJu02Hvz0vy+9dQSulG3r0waOMk+HxhRX5FW3D7XZGez7Hp4XzxO/9r/AG5vAvSfN7xugAAAABJRU5ErkJggg==" alt="Ticket QR code">
+      <div class="code">5907</div>
+    </div>
+  </section>
+
+  <nav class="bottom" aria-label="System navigation">
+    <span class="nav-recent"></span>
+    <span class="nav-home"></span>
+    <span class="nav-gesture"></span>
+  </nav>
+</main>
+</body>
+</html>
