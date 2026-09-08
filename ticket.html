@@ -9,7 +9,7 @@
   html, body { margin: 0; min-height: 100%; background: #111; }
   body {
     font-family: Roboto, Arial, Helvetica, sans-serif;
-    color: #596275;
+    color: #2B2B54;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -28,19 +28,39 @@
     display:flex; align-items:center;
     padding: 0 20px;
     color:#273b78;
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 500;
     letter-spacing: -.3px;
   }
   .back {
-    width: 31px; height: 31px; margin-right: 9px; position:relative;
+    width: 36px;
+    height: 36px;
+    margin-right: 6px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    position: relative;
+    flex: 0 0 36px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
-  .back:before, .back:after {
-    content:""; position:absolute; width:13px; height:2px; left:5px; background:#40558d;
-    transform-origin:left center; border-radius:2px;
+  .back::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-left: 2px solid #2B2B54;
+    border-bottom: 2px solid #2B2B54;
+    transform: rotate(45deg);
+    display: block;
+    margin-left: 5px;
   }
-  .back:before { top:10px; transform:rotate(-48deg); }
-  .back:after { top:20px; transform:rotate(48deg); }
+  .back:focus-visible {
+    outline: 2px solid #2B2B54;
+    outline-offset: 2px;
+    border-radius: 5px;
+  }
 
   .content { padding: 0 12px 88px; }
   .card {
@@ -50,15 +70,15 @@
     padding: 27px 17px 25px;
   }
   .label {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.25;
-    color:#5c6578;
+    color:#2B2B54;
     margin-bottom: 10px;
   }
   .value {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.35;
-    color:#5e687b;
+    color:#2B2B54;
   }
 
   .desc { padding-bottom: 20px; }
@@ -76,14 +96,14 @@
     align-items:center;
   }
   .detail-grid .k {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.15;
-    color:#596275;
+    color:#2B2B54;
   }
   .detail-grid .v {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.15;
-    color:#596275;
+    color:#2B2B54;
     text-align:right;
     white-space:nowrap;
   }
@@ -91,7 +111,7 @@
     display:inline-block;
     background:#0fbd22;
     color:white;
-    font-size:17px;
+    font-size:15px;
     line-height: 32px;
     padding:0 18px;
     border-radius:6px;
@@ -111,7 +131,7 @@
     margin: 0 auto;
   }
   .code {
-    font-size: 16px;
+    font-size: 14px;
     color:#707786;
     margin-top: 24px;
   }
@@ -125,7 +145,7 @@
 </head>
 <body>
 <main class="phone">
-  <header class="header"><span class="back"></span><span>Ticket control</span></header>
+  <header class="header"><button class="back" type="button" aria-label="Back" onclick="window.location.href='main.html'"></button><span>Ticket control</span></header>
 
   <section class="content">
     <div class="card">
